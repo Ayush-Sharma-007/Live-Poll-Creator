@@ -1,10 +1,11 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Navbar = () => {
   return (
     <>
       {/* ========== HEADER ========== */}
-      <header className="flex flex-wrap  md:justify-start md:flex-nowrap z-50 w-full bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700">
+      <header className="flex flex-wrap  md:justify-start md:flex-nowrap z-50 w-full bg-white border-b border-gray-200 dark:bg-neutral-700 dark:border-neutral-700">
         <nav className="relative max-w-[85rem] w-full mx-auto flex items-center justify-between gap-3 py-2 px-4 sm:px-6 lg:px-8">
           <a
             className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white"
@@ -15,9 +16,9 @@ const Navbar = () => {
           </a>
           <div className="grow">
             <div className="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
-              <a
+              <Link
                 className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                href="#"
+                href="/"
                 aria-current="page"
               >
                 <svg
@@ -36,10 +37,10 @@ const Navbar = () => {
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 </svg>
                 Home
-              </a>
-              <a
+              </Link>
+              <Link
                 className="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                href="#"
+                href="/login"
               >
                 <svg
                   className="shrink-0 size-4 me-3 md:me-2 block md:hidden"
@@ -57,10 +58,10 @@ const Navbar = () => {
                   <circle cx={12} cy={7} r={4} />
                 </svg>
                 Login
-              </a>
-              <a
+              </Link>
+              <Link
                 className="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                href="#"
+                href="/signup"
               >
                 <svg
                   className="shrink-0 size-4 me-3 md:me-2 block md:hidden"
@@ -80,10 +81,10 @@ const Navbar = () => {
                   <rect width={20} height={14} x={2} y={6} rx={2} />
                 </svg>
                 Sign Up
-              </a>
-              <a
+              </Link>
+              <Link
                 className="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                href="#"
+                href="/aboutus"
               >
                 <svg
                   className="shrink-0 size-4 me-3 md:me-2 block md:hidden"
@@ -103,10 +104,10 @@ const Navbar = () => {
                   <path d="M10 6h8v4h-8V6Z" />
                 </svg>
                 About Us
-              </a>
-              <a
+              </Link>
+              <Link
                 className="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                href="#"
+                href="/contact"
               >
                 <svg
                   className="shrink-0 size-4 me-3 md:me-2 block md:hidden"
@@ -126,7 +127,7 @@ const Navbar = () => {
                   <path d="M10 6h8v4h-8V6Z" />
                 </svg>
                 Contact Us
-              </a>
+              </Link>
             </div>
           </div>
       {/* End Collapse */ }

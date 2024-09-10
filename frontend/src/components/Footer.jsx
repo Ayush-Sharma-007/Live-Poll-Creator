@@ -24,12 +24,12 @@ const Footer = () => {
             className="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
             href="#"
           >
-            Htmlstream
+            Gray
           </a>{" "}
           family.
         </p>
         <p className="text-gray-500 dark:text-neutral-500">
-          © Preline. 2022 Htmlstream. All rights reserved.
+          © Gray Poll 2022. All rights reserved.
         </p>
       </div>
       {/* Social Brands */}

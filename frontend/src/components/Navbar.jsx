@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <>
       {/* ========== HEADER ========== */}
-      <header className="flex flex-wrap  md:justify-start md:flex-nowrap z-50 w-full bg-white border-b border-gray-200 dark:bg-neutral-700 dark:border-neutral-700">
+      <header className="flex flex-wrap  md:justify-start md:flex-nowrap z-50 w-full bg-white border-b border-gray-200 dark:bg-violet-950 dark:border-violet-950">
         <nav className="relative max-w-[85rem] w-full mx-auto flex items-center justify-between gap-3 py-2 px-4 sm:px-6 lg:px-8">
           <a
             className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white"

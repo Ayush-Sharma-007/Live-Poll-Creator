@@ -1,6 +1,6 @@
-import mongoose, { Mongoose } from "mongoose";
+const { Schema, model } = require("../connection");
 
-const userSchema = new Mongoose.Schema({
+const userSchema = new Schema({
     username: {
         type: String,
         required: [true, "Please provide a username"],
@@ -10,25 +10,18 @@ const userSchema = new Mongoose.Schema({
     email: {
         type: String,
         required: [true, "Please provide an email"],
-        unique: true     
+        unique: true
     },
     password: {
         type: String,
         required: [true, "Please provide a password"],
     },
-    isVerified: {
-        type: Boolean,
-        default: false
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false,
-    },
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
-    verifyTokenExpiry: Date
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
-const User = mongoose.models.users || mongoose.model("users", userSchema);
+const User = model("users", userSchema);
 
-export default User;
+module.exports = User;

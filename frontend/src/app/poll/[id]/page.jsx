@@ -1,59 +1,62 @@
-import React from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
+import { io } from 'socket.io-client';
 
-const Poll = () => {
-    const [options, setOptions] = useState([
-        { id: 1, text: 'Option 1', votes: 0 },
-        { id: 2, text: 'Option 2', votes: 0 },
-        { id: 3, text: 'Option 3', votes: 0 },
-      ]);
-    
-      const [selectedOption, setSelectedOption] = useState(null);
-    
-      const handleVote = (optionId) => {
-        const updatedOptions = options.map((option) => {
-          if (option.id === optionId) {
-            return { ...option, votes: option.votes + 1 };
-          }
-          return option;
-        });
-        setOptions(updatedOptions);
-        setSelectedOption(optionId);
-      };
-    
-      const handleReset = () => {
-        setOptions(options.map((option) => ({ ...option, votes: 0 })));
-        setSelectedOption(null);
-      };
-    
+const poll = () => {
+
+
+  const [socket, setSocket] = useState(io('http://localhost:5000', { autoConnect: false }));
+
+  const [message, setMessage] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    socket.emit("message", message);
+    setMessage("");
+
+  };
+
+  useEffect(() => {
+    socket.connect();
+    console.log("connected", socket.id);
+
+    socket.on("welcome", (s) => {
+      console.log(s);
+
+    });
+
+    socket.on("recieve-message", (data) => {
+      console.log(data);
+      socket.emit("recieve-message", data)
+
+    })
+
+    return () => {
+      socket.disconnect();
+    };
+
+  }, []);
+
+
+
   return (
-    <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
-    <Head>
-      <title>Online Poll</title>
-    </Head>
-    <h2 className="text-2xl font-bold mb-4">Poll Question</h2>
-    <ul className="list-none mb-4">
-      {options.map((option) => (
-        <li key={option.id} className="mb-2">
-          <input
-            type="radio"
-            name="option"
-            value={option.id}
-            checked={selectedOption === option.id}
-            onChange={() => handleVote(option.id)}
-            className="mr-2"
-          />
-          <span className="text-lg">{option.text} ({option.votes} votes)</span>
-        </li>
-      ))}
-    </ul>
-    <button
-      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      onClick={handleReset}
-    >
-      Reset Poll
-    </button>
-  </div>
+    <form onSubmit={handleSubmit}>
+
+      <h1 className='text-5xl font-bold text-red-500 mt-10  '>Vote Here</h1>
+      <input value={message} onChange={e => setMessage(e.target.value)} className="mt-10 ml-4  border-2 w-1/2 px-5 py-10 shadow-md " type="text" placeholder='Send a Message' />
+
+      <br />
+      <button type="submit" className='text-white ml-4 bg-blue-500 rounded-md mt-5 mb-5 p  px-5 py-2 border-2 shadow-md'> Send </button>
+
+      {
+        socket.id
+      }
+
+
+
+    </form>
+
   )
 }
 
-export default Poll
+export default poll;

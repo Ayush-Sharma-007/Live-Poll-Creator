@@ -1,20 +1,46 @@
 'use client'
-import React, { useState } from 'react'
+import axios from 'axios';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react'
+import toast from 'react-hot-toast';
 
 const ManageRoom = () => {
 
   const [count, setCount] = useState(0);
   const [RoomList, setRoomList] = useState([]);
 
-  const addRoom = (e) => {
-    if (e.code === 'Enter') {
-      console.log(e.target.value);
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
 
-      const newRoom = { text: e.target.value, completed: false, added: new Date() };
-      setRoomList([...RoomList, newRoom]);
+  const inputRef = useRef(null);
 
-      e.target.value = '';
-    }
+
+  const fetchUsersData = async () => {  //user async with the await keyword because it only works in async functions
+    const res = await axios.get('http://localhost:5000/room/getall');
+    console.log(res.status);
+    console.table(res.data);
+    setRoomList(res.data)
+  }
+
+  useEffect(() => {
+    fetchUsersData();
+  }, []);
+
+  const deleteRoom = (index) => {
+    console.log(index);
+    const temp = RoomList;
+    temp.splice(index, 1)
+    setRoomList([...temp])
+  }
+
+  const createNewRoom = () => {
+    axios.post('http://localhost:5000/room/add', { title: inputRef.current.value, owner: currentUser._id })
+      .then((result) => {
+        toast.success('room created');
+        fetchUsersData();
+      }).catch((err) => {
+        console.log(err);
+        toast.error('some error ocuured');
+      });
   }
 
   return (
@@ -23,7 +49,11 @@ const ManageRoom = () => {
       <div className='border shadow rounded-xl'>
 
         <div className='p-4 border-b-2'>
-          <input type="text" className='w-full px-3 py-3 bg-gray-300 rounded-xl outline-none' />
+          <input
+            ref={inputRef}
+            placeholder='Add a New Poll Room'
+            type="text" className='w-full px-3 py-3 bg-gray-300 rounded-xl outline-none' />
+          <button onClick={createNewRoom} className='border p-4'>Create New Room</button>
         </div>
 
         <div className='p-6'>
@@ -33,10 +63,22 @@ const ManageRoom = () => {
             RoomList.map((room, i) => {
               return (
 
-                <div key={i} className='rounded-md border mb-5 shadow p-4 bg-gray-100'>
+                <div key={room._id} className='rounded-md border mb-5 shadow p-4 bg-gray-100'>
 
-                  <p>{room.text}</p>
+                  <p>{room.title}</p>
 
+                  <div className='mt-2 flex justify-end gap-4'>
+                    <Link
+                      href={'/host/' + room._id}
+                      className='bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-red-600'>
+                      View Host
+                    </Link>
+                    <button
+                      onClick={() => { deleteRoom(i) }}
+                      className='bg-red-500 text-white px-2 py-1 rounded-full hover:bg-red-600'>
+                      Delete
+                    </button>
+                  </div>
                 </div>
               )
             })

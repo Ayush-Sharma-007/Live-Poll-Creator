@@ -5,9 +5,7 @@ const roomSchema = new Schema({
         type: String,
         required: true
     },
-
-    Owner: {type: Types.ObjectId, ref: "users"},
-
+    owner: { type: Types.ObjectId, ref: "users" },
     createdAt: {
         type: Date,
         default: Date.now

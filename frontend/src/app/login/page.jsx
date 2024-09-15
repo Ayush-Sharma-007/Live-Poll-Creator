@@ -1,14 +1,26 @@
+'use client'
 import React from 'react'
 import { ImFacebook } from "react-icons/im";
 import { FaLinkedinIn, FaRegEnvelope } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
+import { useFormik } from 'formik';
 
 
+const Login = () => {
 
-const SignUp = () => {
+  const loginForm = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    }
+  })
+
   return (
-    <div style={{backgroundImage: "url(https://images.pexels.com/photos/952670/pexels-photo-952670.jpeg?auto=compress&cs=tinysrgb&w=600)"}} className='flex h-screen items-center justify-center w-full flex-1 px-20 text-center'>
+    <div className='flex h-screen items-center justify-center bg-neutral-950 w-full flex-1 px-20 text-center'>
 
       <div className='bg-white rounded-2xl shadow-2xl flex md:flex-row flex-col-reverse w-2/3 max-w-4xl'>
       <div className='w-3/5 p-5 '>
@@ -58,4 +70,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Login

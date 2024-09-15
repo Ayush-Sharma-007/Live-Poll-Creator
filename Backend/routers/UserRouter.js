@@ -8,6 +8,7 @@ router.post('/add', (req, res) => {
 
     new Model(req.body).save()
         .then((result) => {
+            console.log(req);
             res.status(200).json(result);
         }).catch((err) => {
             console.log(err);

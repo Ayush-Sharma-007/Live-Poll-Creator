@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const UserRouter = require('./routers/UserRouter');
-
+const RoomRouter = require('./routers/RoomRouter');
 //initializing express
 const app = express();
 const port = 5000;
@@ -13,6 +13,7 @@ app.use(cors({
 }));
 app.use( express.json() );
 app.use( '/user', UserRouter );
+app.use( '/room', RoomRouter );
 
 //routes or endpoints
 app.get('/', (req, res) => {

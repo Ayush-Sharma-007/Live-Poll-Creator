@@ -1,7 +1,7 @@
 const { Schema, model } = require("../connection");
 
 const userSchema = new Schema({
-    username: {
+    name: {
         type: String,
         required: [true, "Please provide a username"],
         unique: true

@@ -59,9 +59,9 @@ const SignUp = () => {
   return (
     <div className='flex flex-col h-screen items-center justify-center w-full flex-1 px-20 text-center bg-neutral-950'>
 
-      <div className='bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl'>
+      <div className='bg-white flex w-2/3 max-w-4xl'>
 
-      <div className='w-2/5 bg-gray-600 py-36 px-12 text-white rounded-tl-2xl rounded-bl-2xl'>
+      <div className='w-2/5 bg-neutral-950 py-36 px-12 text-white'>
       <h2 className='text-3xl font-bold mb-2'>Hello, Friend!</h2>
       <div className='border-2 w-10 border-white rounded-lg inline-block mb-2'></div>
       <p className='text-white'>If you already have an account then login here.</p>

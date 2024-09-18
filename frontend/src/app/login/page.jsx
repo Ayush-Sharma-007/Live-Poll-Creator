@@ -36,10 +36,10 @@ const Login = () => {
   })
 
   return (
-    <div className='flex h-screen items-center justify-center bg-neutral-950 w-full flex-1 px-20 text-center'>
+    <div className='flex h-screen items-center justify-center bg-neutral-950 w-full flex-1  text-center'>
 
-      <div className='bg-white shadow-2xl flex md:flex-row flex-col-reverse w-2/3 max-w-4xl'>
-        <div className='w-3/5 p-5 '>
+      <div className='bg-white rounded-2xl shadow-2xl grid grid-cols-12 w-full sm:w-2/3  md:max-w-4xl min-h-[60%] max-h-fit'>
+        <div className='p-5 col-span-12 lg:col-span-6 w-full'>   
           <div className='text-left font-bold'>
             <span className='text-gray-500'>Gray</span>Poll
           </div>
@@ -58,24 +58,25 @@ const Login = () => {
             <form onSubmit={loginForm.handleSubmit}>
 
               <div className='flex flex-col items-center'>
-                <div className='bg-gray-100 w-64 p-2 flex items-center space-x-2'>
+                <div className='bg-gray-100 w-64 max-w-[90%] p-2 flex items-center space-x-2'>
                   <FaRegEnvelope className='text-gray-400' />
                   <input
                     id='email'
                     onChange={loginForm.handleChange}
                     value={loginForm.values.email}
-                    type="email" placeholder='Email' className='bg-gray-100 outline-none flex-1 text-sm' />
+                    type="email" placeholder='Email' 
+                    className='bg-gray-100 outline-none flex-1 text-sm w-full'  />
                 </div>
-                <div className='bg-gray-100 w-64 p-2 flex items-center space-x-2 mt-3'>
+                <div className='bg-gray-100 w-64 max-w-[90%] p-2 flex items-center space-x-2 mt-3'>
                   <MdLockOutline className='text-gray-400' />
                   <input
                     id='password'
                     onChange={loginForm.handleChange}
                     value={loginForm.values.password}
-                    type="password" placeholder='Password' className='bg-gray-100 outline-none flex-1 text-sm' />
+                    type="password" placeholder='Password' className='bg-gray-100 outline-none flex-1 text-sm w-full' />
                 </div>
 
-                <div className='flex w-64 justify-between mt-5'>
+                <div className='flex w-full flex-col sm:flex-row sm:justify-between mt-5 items-center'>
                   <label className='flex itmes-center text-xs'><input type="checkbox" className='mr-1' />Remember me</label>
                   <a href="#" className='text-xs'>Forgot Password?</a>
                 </div>
@@ -86,7 +87,7 @@ const Login = () => {
         </div>
 
 
-        <div className='w-2/5 bg-neutral-950 py-36 px-12 text-white'>
+        <div className='w-full bg-gray-600 py-36 px-12 text-white rounded-tr-2xl rounded-br-2xl  hidden lg:flex flex-col items-center lg:col-span-6'>
           <h2 className='text-3xl font-bold mb-2'>Hello, Friend!</h2>
           <div className='border-2 w-10 border-white rounded-lg inline-block mb-2'></div>
           <p className='text-white'>Fill up personal information and start your journey with us.</p>

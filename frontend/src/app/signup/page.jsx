@@ -57,18 +57,18 @@ const SignUp = () => {
   });
 
   return (
-    <div className='flex flex-col h-screen items-center justify-center w-full flex-1 px-20 text-center bg-neutral-950'>
+    <div className='flex flex-col h-screen items-center justify-center w-full flex-1  text-center bg-neutral-950'>
 
-      <div className='bg-white flex w-2/3 max-w-4xl'>
+      <div className='bg-white rounded-2xl shadow-2xl grid grid-cols-12 w-full sm:w-2/3 md:max-w-4xl min-h-[60%] max-h-fit'>
 
-      <div className='w-2/5 bg-neutral-950 py-36 px-12 text-white'>
+      <div className='w-full bg-gray-600 py-36 px-12 text-white rounded-tl-2xl rounded-bl-2xl hidden lg:flex flex-col items-center justify-center lg:col-span-6'>
       <h2 className='text-3xl font-bold mb-2'>Hello, Friend!</h2>
       <div className='border-2 w-10 border-white rounded-lg inline-block mb-2'></div>
       <p className='text-white'>If you already have an account then login here.</p>
       <a href="/login"><button className='border-2 border-white rounded-full px-12 py-2 inline-block mt-10 font-semibold hover:bg-white hover:text-gray-500'>Login</button></a>
       </div>
 
-      <div className='w-3/5 p-5 '>
+      <div className='p-5 col-span-12 lg:col-span-6 w-full'>
       <div className='text-right font-bold'>
         <span className='text-gray-500'>Gray</span>Poll
       </div>
@@ -87,35 +87,36 @@ const SignUp = () => {
         <form className='flex flex-col items-center' onSubmit={ signupForm.handleSubmit} >
 
           <label htmlFor="name"><span className='text-sm ml-4 text-red-500'>{ signupForm.touched.name && signupForm.errors.name}</span></label>
-          <div className='bg-gray-100 w-64 p-2 flex items-center space-x-2'>
+          <div className='bg-gray-100 w-64 max-w-[90%] p-2 flex items-center space-x-2'>
             <IoPersonSharp className='text-gray-400 text-sm'/>
             <input
             onChange={ signupForm.handleChange } value={ signupForm.values.name } id='name'
-            type="text" placeholder='Name' className={'bg-gray-100 ml-2 outline-none flex-1 text-sm '+ ((signupForm.touched.name && signupForm.errors.name) ? 'border-red-500': '' )} />
+            type="text" placeholder='Name' 
+            className={'bg-gray-100 ml-2 outline-none flex-1 text-sm w-full '+ ((signupForm.touched.name && signupForm.errors.name) ? 'border-red-500': '' )} />
           </div>
 
-          <label htmlFor="email"><span className='text-sm ml-4 text-red-500'>{ signupForm.touched.email && signupForm.errors.email}</span></label>
-          <div className='bg-gray-100 w-64 p-2 flex items-center space-x-2'>
+          <label htmlFor="email"><span className='text-sm ml-4 text-red-500 '>{ signupForm.touched.email && signupForm.errors.email}</span></label>
+          <div className='bg-gray-100 w-64 max-w-[90%] p-2  flex items-center space-x-2'>
             <FaRegEnvelope className='text-gray-400'/>
             <input 
              onChange={ signupForm.handleChange } value={ signupForm.values.email } id='email'
-            type="Email" placeholder='Email' className={'bg-gray-100 outline-none flex-1 text-sm '+ ((signupForm.touched.email && signupForm.errors.email) ? 'border-red-500': '' )}/>
+            type="Email" placeholder='Email' className={'bg-gray-100 outline-none flex-1 text-sm w-full '+ ((signupForm.touched.email && signupForm.errors.email) ? 'border-red-500': '' )}/>
           </div>
 
           <label htmlFor="password"><span className='text-sm ml-4 text-red-500'>{ signupForm.touched.password && signupForm.errors.password}</span></label>
-          <div className='bg-gray-100 w-64 p-2 flex items-center space-x-2'>
+          <div className='bg-gray-100 w-64 max-w-[90%] p-2 flex items-center space-x-2'>
             <MdLockOutline className='text-gray-400'/>
             <input 
             onChange={ signupForm.handleChange } value={ signupForm.values.password } id='password'
-            type="password" placeholder='Password' className={'bg-gray-100 outline-none flex-1 text-sm '+ ((signupForm.touched.name && signupForm.errors.name) ? 'border-red-500': '' )}/>
+            type="password" placeholder='Password' className={'bg-gray-100 outline-none flex-1 text-sm w-full '+ ((signupForm.touched.name && signupForm.errors.name) ? 'border-red-500': '' )}/>
           </div>
 
           <label htmlFor="confirmPassword"><span className='text-sm ml-4 text-red-500'>{ signupForm.touched.confirmPassword && signupForm.errors.confirmPassword}</span></label>
-          <div className='bg-gray-100 w-64 p-2 flex items-center space-x-2 '>
+          <div className='bg-gray-100 w-64 max-w-[90%] p-2 flex items-center space-x-2 '>
             <MdLockOutline className='text-gray-400'/>
             <input 
             onChange={ signupForm.handleChange } value={ signupForm.values.confirmPassword } id='confirmPassword'
-            type="password" placeholder='Confirm Password' className={'bg-gray-100 outline-none flex-1 text-sm '+ ((signupForm.touched.name && signupForm.errors.name) ? 'border-red-500': '' )}/>
+            type="password" placeholder='Confirm Password' className={'bg-gray-100 outline-none flex-1 text-sm w-full '+ ((signupForm.touched.name && signupForm.errors.name) ? 'border-red-500': '' )}/>
           </div>
         <button type='submit' disabled={ signupForm.isSubmitting } className='border-2 border-gray-600 text-gray-600 rounded-full px-12 py-2 inline-block mt-10 font-semibold hover:bg-gray-600 hover:text-white disabled:opacity-50'>
           <span>{ signupForm.isSubmitting ? 'Please Wait' : 'Submit'}</span>

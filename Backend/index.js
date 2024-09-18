@@ -1,35 +1,69 @@
-const express = require('express');
+//importing express
+const http = require("http")
+const express = require("express");
+const { Server } = require("socket.io");
+// const UserRouter =require('./Routers/userRouter');
 const cors = require('cors');
 
-const UserRouter = require('./routers/UserRouter');
-const RoomRouter = require('./routers/RoomRouter');
-//initializing express
+const UserRouter = require('./routers/userRouter')
+const RoomRouter = require('./routers/roomRouter')
+
+//initialising express
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: { origin: '*' }
+});
 const port = 5000;
 
+
+app.use(cors({
+    origin: '*'
+}));
+app.use(express.json());
+app.use('/user', UserRouter);
+
+app.use(express.json());
+app.use('/room', RoomRouter);
+
+
+io.on("connection", (socket) => {
+    console.log("A New User Connected", socket.id);
+
+    socket.on("message", (data) => {
+        console.log(data);
+        io.emit("recieve-message", data);
+
+
+    });
+
+    socket.on('disconnect', () => {
+        console.log("user disconnected", socket.id);
+
+    })
+
+    socket.on('set-question', ({ room, question }) => {
+        socket.in(room).emit(question);
+    })
+
+
+});
 //middleware
 app.use(cors({
     origin: 'http://localhost:3000'
-}));
-app.use( express.json() );
-app.use( '/user', UserRouter );
-app.use( '/room', RoomRouter );
+}
 
-//routes or endpoints
+));
+app.use(express.json());
+// app.use('/user', UserRouter);
+
+//socket.io
+
+
+//route or endpoint 
 app.get('/', (req, res) => {
     res.send('Response from express');
 });
 
-app.get('/add', (req, res) => {
-    res.send('Response from add');
-});
 
-app.get('/getall', (req, res) => {
-    res.send('Response from getall');
-});
-
-app.get('/update', (req, res) => {
-    res.send('Response from update');
-});
-
-app.listen ( port, () => { console.log(" Server Started");})
+server.listen(port, () => { console.log('server started') });

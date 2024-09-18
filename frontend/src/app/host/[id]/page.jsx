@@ -1,92 +1,104 @@
 'use client';
-import React, { useState } from 'react'
+import app_config from '@/config';
+import axios from 'axios';
+import { useParams } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react'
+import ReactWordcloud from 'react-wordcloud';
+import { io } from 'socket.io-client';
+
+const words = [
+    {
+        text: 'told',
+        value: 64,
+    },
+    {
+        text: 'mistake',
+        value: 11,
+    },
+    {
+        text: 'thought',
+        value: 16,
+    },
+    {
+        text: 'bad',
+        value: 17,
+    },
+    {
+        text: 'correct',
+        value: 10,
+    },
+    {
+        text: 'day',
+        value: 54,
+    },
+    {
+        text: 'prescription',
+        value: 12,
+    },
+
+
+]
+
+const options = {
+    colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"],
+    enableTooltip: true,
+    deterministic: false,
+    fontFamily: "impact",
+    fontSizes: [40, 60],
+    fontStyle: "normal",
+    fontWeight: "normal",
+    padding: 1,
+    rotations: 2,
+    rotationAngles: [0, 90],
+    scale: "sqrt",
+    spiral: "archimedean",
+    transitionDuration: 300
+};
 
 const host = () => {
 
-     const[ count, setCount ] = useState(0);
+    const [socket, setSocket] = useState(io(app_config.api_url, { autoConnect: false }));
+    const { id } = useParams();
+    const [roomData, setRoomData] = useState(null);
 
-     const [taskList, setTaskList] = useState([
-      
-     ]);
+    const inputRef = useRef(null);
 
-    const addTask =(e)=>{
-        if (e.code === 'Enter'){
-            console.log(e.target.value);
+    const getRoomData = async () => {
+        const res = await axios.get(app_config.api_url + '/room/getbyid/' + id);
+        console.log(res.data);
 
-            const newTask = { text: e.target.value, completed: false ,added :new Date ()};
-
-            setTaskList([newTask, ...taskList,])
-
-
-
-            e.target.value='';
-        }
+        setRoomData(res.data);
     }
 
-    const deleteTask = (index) => {
-        console.log(index);
+    useEffect(() => {
+        socket.connect();
+        getRoomData();
+    }, [])
 
-        const temp =taskList ;
-        temp.splice (index ,1);
-        setTaskList([...temp]);
+    const setRoomQuestion = () => {
+        socket.emit('set-question', { room: room.title, question: inputRef.current.value });
     }
 
-    const toggleCompleted =(index) =>{
-        const temp = taskList ;
 
-        temp[index].completed = !temp[index].completed;
-        setTaskList ([...temp]);
-    }
+    return (
+        <div className='max-w-5xl mx-auto mt-6'>
+            <div className='border shadow rounded-3xl'>
+                <div className='p-4 border-b-2'>
+                    <input
+                        ref={inputRef}
+                        placeholder='Type Your Answer'
+                        type="text"
+                        className='w-full p-3 bg-gray-300 rounded-xl outline-none' />
 
-  return (
-    <div className='max-w-5xl mx-auto mt-6'>
-    <div className='border shadow rounded-3xl'>
-        <div className='p-4 border-b-2'>
-            <input 
-            onKeyDown={addTask}
-            
-            placeholder='Type Your Answer' 
-            type="text"
-            className='w-full p-3 bg-gray-300 rounded-xl outline-none' />
+                        <button onClick={setRoomQuestion}>Submit</button>
+                </div>
+                <div className='p-6'>
+                    <ReactWordcloud options={options} words={words} />
+                </div>
+            </div>
+
         </div>
-        <div className='p-6'>
-
-            {/* <h1 className='text-3xl text-red-500'>{count}  </h1>
-            
-            <button className='bg-gray-300 p-4' 
-            onClick={() => {setcount (count+1);console.log(count);}}
-                >Add Button</button> */}
-                {
-                    taskList.map( (task,index) => {return (
-                        <div key={index} className='rounded-md border mb-5 shadow p-4 bg-gray-100 '>
-                            {
-                                task.completed ? (
-                                    <p className='bg-green-500 text-white rounded-full text-sm px-2 w-fit'>Completed</p>
-                
-                                ):(<p className='bg-yellow-500 text-white rounded-full text-sm px-2 w-fit'>Pending</p>)
-                            }
-                            <p>{task.text}</p>
-                            <div className='mt-2 flex justify-end gap-4'> 
-                                <button
-                                onClick={() => {toggleCompleted(index)}} 
-                                
-                                className='bg-blue-500 px-2 py-1 rounded-full'>
-                                    {task.completed ?  'Mark as Pending' : 'Mark as completed'} 
-                                </button>
-                                
-                                <button
-                                onClick={() => { deleteTask(index)}} 
-                                className='bg-red-500 px-2 py-1 rounded-full'>Delete</button>
-                            </div>
-
-                        </div>
-                    )})
-                }
-             </div>
-    </div>
-    
-    </div>
-  )
+    )
 }
 
 export default host;

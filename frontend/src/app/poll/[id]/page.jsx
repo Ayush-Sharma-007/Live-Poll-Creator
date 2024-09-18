@@ -1,11 +1,12 @@
 'use client';
+import app_config from '@/config';
 import React, { useEffect, useState } from 'react'
 import { io } from 'socket.io-client';
 
-const poll = () => {
+const Poll = () => {
 
 
-  const [socket, setSocket] = useState(io('http://localhost:5000', { autoConnect: false }));
+  const [socket, setSocket] = useState(io(app_config.api_url, { autoConnect: false }));
 
   const [message, setMessage] = useState("")
 
@@ -59,4 +60,4 @@ const poll = () => {
   )
 }
 
-export default poll;
+export default Poll;

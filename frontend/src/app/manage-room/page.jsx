@@ -1,4 +1,5 @@
 'use client'
+import app_config from '@/config';
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react'
@@ -15,7 +16,7 @@ const ManageRoom = () => {
 
 
   const fetchUsersData = async () => {  //user async with the await keyword because it only works in async functions
-    const res = await axios.get('http://localhost:5000/room/getall');
+    const res = await axios.get(app_config.api_url+'/room/getall');
     console.log(res.status);
     console.table(res.data);
     setRoomList(res.data)
@@ -33,7 +34,7 @@ const ManageRoom = () => {
   }
 
   const createNewRoom = () => {
-    axios.post('http://localhost:5000/room/add', { title: inputRef.current.value, owner: currentUser._id })
+    axios.post(app_config.api_url+'/room/add', { title: inputRef.current.value, owner: currentUser._id })
       .then((result) => {
         toast.success('room created');
         fetchUsersData();

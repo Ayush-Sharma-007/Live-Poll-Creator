@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import app_config from '@/config';
 
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
     onSubmit: (values) => {
       console.log(values);
 
-      axios.post('http://localhost:5000/user/authenticate', values)
+      axios.post(app_config.api_url+'/user/authenticate', values)
         .then((result) => {
           toast.success('Logged in successfully');
           localStorage.setItem('token', result.data.token);

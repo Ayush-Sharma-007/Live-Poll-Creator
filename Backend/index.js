@@ -37,13 +37,25 @@ io.on("connection", (socket) => {
 
     });
 
+    socket.on('join-room', (room) => {
+        socket.join(room);
+    })
+
     socket.on('disconnect', () => {
         console.log("user disconnected", socket.id);
 
     })
 
     socket.on('set-question', ({ room, question }) => {
-        socket.in(room).emit(question);
+        console.log(question + ' in room ' + room);
+
+        socket.in(room).emit('get-question', question);
+    })
+
+    socket.on('submit-poll', ({ room, poll }) => {
+        console.log(poll, room);
+        
+        socket.in(room).emit('rec-poll', poll);
     })
 
 

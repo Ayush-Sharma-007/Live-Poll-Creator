@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const ManageRoom = () => {
 
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [RoomList, setRoomList] = useState([]);
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
@@ -54,7 +54,7 @@ const ManageRoom = () => {
             ref={inputRef}
             placeholder='Add a New Poll Room'
             type="text" className='w-full px-3 py-3 bg-gray-300 rounded-xl outline-none' />
-          <button onClick={createNewRoom} className='border p-4'>Create New Room</button>
+          <button onClick={createNewRoom} className='border p-4 mt-3 rounded-full border-blue-600 text-white bg-blue-600 font-semibold text-sm'>Create New Room</button>
         </div>
 
         <div className='p-6'>
@@ -71,7 +71,7 @@ const ManageRoom = () => {
                   <div className='mt-2 flex justify-end gap-4'>
                     <Link
                       href={'/host/' + room._id}
-                      className='bg-blue-500 text-white px-2 py-1 rounded-full hover:bg-red-600'>
+                      className='bg-blue-500 text-white px-2 py-1 font-semibold text-sm rounded-full hover:bg-blue-700'>
                       View Host
                     </Link>
                     <button

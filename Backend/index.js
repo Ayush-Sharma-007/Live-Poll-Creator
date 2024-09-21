@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
 });
 //middleware
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: '*'
 }
 
 ));
@@ -78,4 +78,4 @@ app.get('/', (req, res) => {
 });
 
 
-server.listen(port, () => { console.log('server started') });
+server.listen(port, '192.168.18.241', () => { console.log('server started') });

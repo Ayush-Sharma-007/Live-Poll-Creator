@@ -104,9 +104,9 @@ const host = () => {
     }
 
     return (
-        <div className='bg-neutral-950 h-screen p-6'>
-            <QRCode value={'http://192.168.18.245:3000/poll/66e6eddab02b090521042099'} className='my-5' />
-            <div className='max-w-5xl mx-auto bg-white rounded-3xl shadow-md shadow-white' >
+        <div className='bg-neutral-950 p-6'>
+            
+            <div className='max-w-5xl h-full mx-auto bg-white rounded-3xl shadow-md shadow-white' >
                 <div className='border shadow rounded-3xl'>
                     <div className='p-4 border-b-2'>
                         <input
@@ -116,15 +116,20 @@ const host = () => {
                             className='w-full p-3 bg-gray-300 rounded-xl outline-none' />
 
                         <button onClick={setRoomQuestion} className='border-none rounded-full px-3 py-2 bg-blue-500 text-white mt-3'>Submit</button>
-
+                        
+                    </div>
+                    <div className='flex items-center'>
+                        <p className='text-2xl font-semibold px-20'>Scan the Code to share your responses</p>
+                        <QRCode value={'http://192.168.29.53:3000/poll/'+id} className='my-5 h-40 border-b w-full pb-5' />
                     </div>
                     <div className='p-6'>
-                        {submittedPolls}
+                        {/* {submittedPolls} */}
                         <ReactWordcloud options={options} words={formatWordData()} />
                     </div>
                 </div>
 
             </div>
+            
         </div>
     )
 }

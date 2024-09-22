@@ -70,12 +70,6 @@ const Poll = () => {
       <br />
       <button onClick={submitPoll} type="submit" className='text-white ml-4 bg-blue-500 rounded-md mt-5 mb-5 p  px-5 py-2 border-2 shadow-md'>Submit</button>
 
-      {
-        socket.id
-      }
-
-
-
     </form>
 
   )

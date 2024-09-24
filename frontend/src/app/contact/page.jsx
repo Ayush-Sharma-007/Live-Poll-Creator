@@ -9,7 +9,7 @@ import { FaInstagramSquare } from "react-icons/fa";
 
 const Contact = () => {
   return (
-    <div style={{backgroundImage: "url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)"}} className='antialiased bg-gray-100'>
+    <div className='antialiased bg-neutral-950'>
       <div className='flex w-full min-h-screen justify-center items-center'>
         <div className='flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 bg-cyan-700 w-full max-w-4xl p-8 rounded-xl shadow-lg text-white sm:p-12 overflow-hidden'>
           <div className='flex flex-col space-y-8 justify-between'>

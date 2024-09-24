@@ -4,8 +4,7 @@ const userSchema = new Schema({
     name: {
         type: String,
         required: [true, "Please provide a username"],
-        unique: true
-    },
+        },
 
     email: {
         type: String,
@@ -15,6 +14,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, "Please provide a password"],
+        unique: true
     },
     createdAt: {
         type: Date,

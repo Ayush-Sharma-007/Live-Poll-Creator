@@ -1,45 +1,44 @@
 'use client';
 import app_config from '@/config';
 import axios from 'axios';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import QRCode from 'react-qr-code';
 import ReactWordcloud from 'react-wordcloud';
 import { io } from 'socket.io-client';
 
-const words = [
-    {
-        text: 'told',
-        value: 64,
-    },
-    {
-        text: 'mistake',
-        value: 11,
-    },
-    {
-        text: 'thought',
-        value: 16,
-    },
-    {
-        text: 'bad',
-        value: 17,
-    },
-    {
-        text: 'correct',
-        value: 10,
-    },
-    {
-        text: 'day',
-        value: 54,
-    },
-    {
-        text: 'prescription',
-        value: 12,
-    },
+// const words = [
+//     {
+//         text: 'told',
+//         value: 64,
+//     },
+//     {
+//         text: 'mistake',
+//         value: 11,
+//     },
+//     {
+//         text: 'thought',
+//         value: 16,
+//     },
+//     {
+//         text: 'bad',
+//         value: 17,
+//     },
+//     {
+//         text: 'correct',
+//         value: 10,
+//     },
+//     {
+//         text: 'day',
+//         value: 54,
+//     },
+//     {
+//         text: 'prescription',
+//         value: 12,
+//     },
 
 
-]
+// ]
 
 const options = {
     colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"],
@@ -120,7 +119,7 @@ const host = () => {
                     </div>
                     <div className='flex items-center'>
                         <p className='text-2xl font-semibold px-20'>Scan the Code to share your responses</p>
-                        <QRCode value={'http://192.168.29.53:3000/poll/'+id} className='my-5 h-40 border-b w-full pb-5' />
+                        <QRCode value={'http://192.168.18.15:3000/poll/'+id} className='my-5 h-40 border-b w-full pb-5' />
                     </div>
                     <div className='p-6'>
                         {/* {submittedPolls} */}

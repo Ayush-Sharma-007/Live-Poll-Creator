@@ -5,8 +5,8 @@ const { Server } = require("socket.io");
 // const UserRouter =require('./Routers/userRouter');
 const cors = require('cors');
 
-const UserRouter = require('./routers/userRouter')
-const RoomRouter = require('./routers/roomRouter')
+const UserRouter = require('./routers/UserRouter')
+const RoomRouter = require('./routers/RoomRouter')
 
 //initialising express
 const app = express();
@@ -78,4 +78,4 @@ app.get('/', (req, res) => {
 });
 
 
-server.listen(port, '192.168.29.53', () => { console.log('server started') });
+server.listen(port, '192.168.18.15', () => { console.log('server started') });
